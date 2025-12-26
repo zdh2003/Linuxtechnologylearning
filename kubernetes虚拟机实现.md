@@ -146,10 +146,10 @@ source /etc/profile
 ###节点状态
 ```shell
 kubectl get node
-NAME     STATUS     ROLES                  AGE     VERSION
-master   NotReady   control-plane,master   16m     v1.23.17
-node1    NotReady   <none>                 3m52s   v1.23.17
-node2    NotReady   <none>                 3m47s   v1.23.17
+NAME     STATUS   ROLES                  AGE    VERSION
+master   Ready    control-plane,master   160m   v1.23.17
+node1    Ready    <none>                 159m   v1.23.17
+node2    Ready    <none>                 155m   v1.23.17
 ```
 ## 使用k8s安装Nginx
 - 配置
@@ -211,44 +211,12 @@ kubectl apply -f /opt/nginx.yaml
 - 状态
 ```shell
 kubectl get pod,svc
-NAME                                    READY   STATUS    RESTARTS   AGE
-pod/nginx-deployment-59d7db4f6f-c8kxp   0/1     Pending   0          64s
-pod/nginx-deployment-59d7db4f6f-hvb57   0/1     Pending   0          64s
-pod/nginx-deployment-59d7db4f6f-rztv2   0/1     Pending   0          64s
+NAME                                   READY   STATUS    RESTARTS   AGE
+pod/nginx-deployment-c7b6bb6f5-4vqjr   1/1     Running   0          114m
+pod/nginx-deployment-c7b6bb6f5-d6hpg   1/1     Running   0          114m
+pod/nginx-deployment-c7b6bb6f5-d95v5   1/1     Running   0          114m
 
 NAME                    TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)        AGE
-service/kubernetes      ClusterIP   10.96.0.1      <none>        443/TCP        46m
-service/nginx-service   NodePort    10.104.70.59   <none>        80:32001/TCP   64s
-
+service/kubernetes      ClusterIP   10.96.0.1      <none>        443/TCP        161m
+service/nginx-service   NodePort    10.98.68.158   <none>        80:32001/TCP   148m
 ```
-# 111111111111
-```shell
-Your Kubernetes control-plane has initialized successfully!
-
-To start using your cluster, you need to run the following as a regular user:
-
-  mkdir -p $HOME/.kube
-  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-  sudo chown $(id -u):$(id -g) $HOME/.kube/config
-
-Alternatively, if you are the root user, you can run:
-
-  export KUBECONFIG=/etc/kubernetes/admin.conf
-
-You should now deploy a pod network to the cluster.
-Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
-  https://kubernetes.io/docs/concepts/cluster-administration/addons/
-
-Then you can join any number of worker nodes by running the following on each as root:
-
-kubeadm join 10.15.10.10:6443 --token l5k69z.cx8rjeti1pm4pade \
-	--discovery-token-ca-cert-hash sha256:52a33e07705e673bfb26d6f301c323aba598e9192ef41be0afe998bacbd01982 
-```
-
-
-
-
-
-
-
-#aaa
