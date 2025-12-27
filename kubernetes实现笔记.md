@@ -4,9 +4,9 @@
 
 |   IP|主机名   |作用   |
 | ------------ | ------------ | ------------ |
-|  10.1.0.4 |Master   |主管理   |
-|  10.1.0.11|Node1  |从节点1|
-|  10.1.0.12|Node2  |从节点2|
+|  10.15.10.10 |Master   |主管理   |
+|  10.15.10.11|Node1  |从节点1|
+|  10.15.10.12|Node2  |从节点2|
 
 
 ## 三台虚拟机同时执行
@@ -221,34 +221,3 @@ service/kubernetes      ClusterIP   10.96.0.1      <none>        443/TCP        
 service/nginx-service   NodePort    10.104.70.59   <none>        80:32001/TCP   64s
 
 ```
-# 111111111111
-```shell
-Your Kubernetes control-plane has initialized successfully!
-
-To start using your cluster, you need to run the following as a regular user:
-
-  mkdir -p $HOME/.kube
-  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-  sudo chown $(id -u):$(id -g) $HOME/.kube/config
-
-Alternatively, if you are the root user, you can run:
-
-  export KUBECONFIG=/etc/kubernetes/admin.conf
-
-You should now deploy a pod network to the cluster.
-Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
-  https://kubernetes.io/docs/concepts/cluster-administration/addons/
-
-Then you can join any number of worker nodes by running the following on each as root:
-
-kubeadm join 10.15.10.10:6443 --token l5k69z.cx8rjeti1pm4pade \
-	--discovery-token-ca-cert-hash sha256:52a33e07705e673bfb26d6f301c323aba598e9192ef41be0afe998bacbd01982 
-```
-
-
-
-
-
-
-
-#aaa
