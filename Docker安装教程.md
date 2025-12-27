@@ -64,3 +64,14 @@ Server: Docker Engine - Community
   Version:          0.19.0
   GitCommit:        de40ad0
 ```
+-配置镜像加速
+```shell
+sudo mkdir -p /etc/docker
+sudo tee /etc/docker/daemon.json << -'EOF'
+{
+  "registry-mirrors": ["https://docker.m.daocloud.io"]
+}
+EOF
+
+systemctl daemon-reload && systemctl restart docker
+```
