@@ -85,3 +85,4 @@ docker run -d -p 80:80 nginx
 d90252cb3649d57aae9b2b3bf398123de7c16fe90860cac01b743681d321dcdb
 # 容器的完整ID
 ```
+![验证](image.png)
