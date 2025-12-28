@@ -41,7 +41,7 @@ docker images
 REPOSITORY   TAG       IMAGE ID       CREATED       SIZE
 mysql        5.7       5107333e08a8   2 years ago   501MB
 ```
-###容器基础操作
+### 容器基础操作
 - 直接创造运行一个容器
 ```shell
 docker run nginx
@@ -74,7 +74,7 @@ e6b81cffe57b   nginx     "/docker-entrypoint.…"   About a minute ago   Up 59 s
 - 查看所有已创建的容器
 ```shell
 docker ps -a
-# 所有的容器信息都会打印出来
+# 所有容器的信息打印出来
 CONTAINER ID   IMAGE     COMMAND                   CREATED         STATUS                          PORTS     NAMES
 e6b81cffe57b   nginx     "/docker-entrypoint.…"   2 minutes ago   Exited (0) About a minute ago
 ```
@@ -86,3 +86,68 @@ d90252cb3649d57aae9b2b3bf398123de7c16fe90860cac01b743681d321dcdb
 # 容器的完整ID
 ```
 ![验证](image.png)
+
+```shell
+docker run -d -P nginx
+c88b19c4c251007513ba0facecdbb2eeaa4b2e9a06f0b15f5ce5708ce13f6f9c
+# -P 暴露容器中所有端口，并且在主机中使用随机端口去映射到这些端口
+docker ps
+CONTAINER ID   IMAGE     COMMAND                   CREATED          STATUS         PORTS                                     NAMES
+c88b19c4c251   nginx     "/docker-entrypoint.…"   10 seconds ago   Up 9 seconds   0.0.0.0:32768->80/tcp, :::32768->80/tcp   recursing_khayyam
+```
+![验证](image-2.png)
+
+- 删除容器
+```shell
+docker rm <容器ID>
+# 可以唯一指向的不完整ID也能删除对应的容器
+docker ps -a
+CONTAINER ID   IMAGE     COMMAND                   CREATED       STATUS                   PORTS                               NAMES
+d90252cb3649   nginx     "/docker-entrypoint.…"   2 hours ago   Up 2 hours               0.0.0.0:80->80/tcp, :::80->80/tcp   sleepy_shirley
+e6b81cffe57b   nginx     "/docker-entrypoint.…"   2 hours ago   Exited (0) 2 hours ago                                       happy_booth
+docker rm e6b8
+e6b8
+docker rm <容器名字>
+docker rm nginx1
+nginx1
+# docker rm <容器ID> 不能删除正在运行中容器
+docker rm d90252cb3649
+Error response from daemon: cannot remove container "/sleepy_shirley": container is running: stop the container before removing or force remove
+docker rm -f d90252cb3649
+d90252cb3649
+# -f 是强制删除运行中容器
+```
+- 停止容器
+
+```shell
+docker stop c88b19c
+c88b19c
+docker ps -a
+CONTAINER ID   IMAGE     COMMAND                   CREATED          STATUS                     PORTS     NAMES
+c88b19c4c251   nginx     "/docker-entrypoint.…"   16 minutes ago   Exited (0) 6 seconds ago             recursing_khayyam
+# 使用容器名字也能停止
+docker stop nginx1
+nginx1
+```
+- 启动容器
+
+```shell
+docker start c88b19c
+c88b19c
+docker ps
+CONTAINER ID   IMAGE     COMMAND                   CREATED          STATUS         PORTS                                     NAMES
+c88b19c4c251   nginx     "/docker-entrypoint.…"   18 minutes ago   Up 3 seconds   0.0.0.0:32769->80/tcp, :::32769->80/tcp   recursing_khayyam
+# 使用容器名字也能启动
+docker start nginx1
+nginx1
+```
+
+- 指定容器名字
+
+```shell
+docker run -d -p 80:80 --name nginx1 nginx
+#  --name 指定容器名字为nginx1
+docker ps
+CONTAINER ID   IMAGE     COMMAND                   CREATED          STATUS         PORTS                                     NAMES
+0f290bad1f2b   nginx     "/docker-entrypoint.…"   3 seconds ago    Up 2 seconds   0.0.0.0:80->80/tcp, :::80->80/tcp         nginx1
+```
